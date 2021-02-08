@@ -15,6 +15,7 @@ class Boolean extends Type
         parent::__construct($name, $this->column, 1);
     }
 
+
     /**
      * @param $default
      * @return Boolean
@@ -22,8 +23,8 @@ class Boolean extends Type
      */
     public function default($default)
     {
-        if (is_bool($default) || in_array($default, [0, 1, true, false]))
-            return parent::default(intval($default));
+        if (is_bool($default) || in_array($default, [0, 1, true, false]) || is_null($default))
+            return is_null($default) ? parent::default(null) : parent::default(intval($default));
         throw new MethodTypePropertyException('boolean', gettype($default));
     }
 }
