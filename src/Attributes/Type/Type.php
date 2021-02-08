@@ -61,7 +61,7 @@ class Type
     public function unique()
     {
         $this->unique = true;
-        $this->default($this->defaultValue);
+//        $this->default($this->defaultValue);
         return $this;
     }
 
@@ -93,7 +93,7 @@ class Type
     public function compile()
     {
         $sql = $this->sizeable
-            ? sprintf("%s %s(%s)", addslashes($this->name), addslashes($this->column), $this->length)
+            ? sprintf("`%s` %s(%s)", addslashes($this->name), addslashes($this->column), $this->length)
             : sprintf("%s %s", addslashes($this->name), addslashes($this->column));
         return $sql
             . ($this->nullable ? '' : ' NOT NULL')
