@@ -110,7 +110,7 @@ class Type
             : sprintf("`%s` %s", addslashes($this->name), addslashes($this->column));
         return $sql
             . ($this->nullable ? '' : ' NOT NULL')
-            . ($this->increment ? '' : ' AUTO_INCREMENT')
+            . ($this->increment ? ' AUTO_INCREMENT' : '')
             . ($this->default === $this->defaultValue ? '' : ' DEFAULT ' . ($this->default ?? 'NULL'))
             . ($this->primary ? ' PRIMARY KEY' : '')
             . ($this->unique ? ' UNIQUE' : '');
