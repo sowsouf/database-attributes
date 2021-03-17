@@ -94,7 +94,7 @@ class Type
     {
         $sql = $this->sizeable
             ? sprintf("`%s` %s(%s)", addslashes($this->name), addslashes($this->column), $this->length)
-            : sprintf("%s %s", addslashes($this->name), addslashes($this->column));
+            : sprintf("`%s` %s", addslashes($this->name), addslashes($this->column));
         return $sql
             . ($this->nullable ? '' : ' NOT NULL')
             . ($this->default === $this->defaultValue ? '' : ' DEFAULT ' . ($this->default ?? 'NULL'))
