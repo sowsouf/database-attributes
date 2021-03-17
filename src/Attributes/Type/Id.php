@@ -15,6 +15,7 @@ class Id extends Type
         $this->setSizeable(false);
         $this->primary();
         $this->unique();
+        $this->increment();
     }
 
 }

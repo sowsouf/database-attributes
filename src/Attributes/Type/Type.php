@@ -10,10 +10,15 @@ class Type
     private string $column;
     private string $length;
 
+    /**
+     * @var mixed $default
+     */
     private $default;
+
     private bool $nullable;
     private bool $primary;
     private bool $unique;
+    private bool $increment;
 
     private string $defaultValue = 'ssf__default--value';
     private bool $sizeable = true;
@@ -30,6 +35,7 @@ class Type
         $this->nullable = false;
         $this->primary = false;
         $this->unique = false;
+        $this->increment = false;
 
         $this->default = $this->defaultValue;
     }
@@ -61,6 +67,13 @@ class Type
     public function unique()
     {
         $this->unique = true;
+//        $this->default($this->defaultValue);
+        return $this;
+    }
+
+    public function increment()
+    {
+        $this->increment = true;
 //        $this->default($this->defaultValue);
         return $this;
     }
@@ -97,6 +110,7 @@ class Type
             : sprintf("`%s` %s", addslashes($this->name), addslashes($this->column));
         return $sql
             . ($this->nullable ? '' : ' NOT NULL')
+            . ($this->increment ? '' : ' AUTO_INCREMENT')
             . ($this->default === $this->defaultValue ? '' : ' DEFAULT ' . ($this->default ?? 'NULL'))
             . ($this->primary ? ' PRIMARY KEY' : '')
             . ($this->unique ? ' UNIQUE' : '');
